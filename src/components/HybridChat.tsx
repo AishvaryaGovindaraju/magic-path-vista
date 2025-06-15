@@ -291,11 +291,11 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
     >
       {/* Header */}
       <div className="h-16 flex items-center justify-between px-6 cursor-pointer hover:bg-[#4E4E50]/20 transition-colors" onClick={onToggle}>
-        <div className="flex items-center space-x-3">
-          {/* Navigation icons */}
-          <div className="flex items-center space-x-2 mr-2">
+        <div className="flex items-center space-x-3 relative" style={{ minWidth: 0 }}>
+          {/* Vertical navigation icons above avatar/title */}
+          <div className="absolute left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center space-y-2 z-10">
             <button
-              className="p-0.5 rounded-full hover:bg-[#950740]/20 transition"
+              className="bg-[#232328] hover:bg-[#950740]/20 rounded-full p-1 transition"
               title="Back to Home"
               type="button"
               onClick={e => {
@@ -303,10 +303,13 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
                 navigate("/");
               }}
             >
-              <ArrowLeft className="w-5 h-5 text-white" />
+              <svg width={20} height={20} stroke="white" fill="none" strokeWidth={2} viewBox="0 0 24 24">
+                <path d="M19 12H5"></path>
+                <path d="M12 19l-7-7 7-7"></path>
+              </svg>
             </button>
             <button
-              className="p-0.5 rounded-full hover:bg-[#950740]/20 transition"
+              className="bg-[#232328] hover:bg-[#950740]/20 rounded-full p-1 transition"
               title="Home"
               type="button"
               onClick={e => {
@@ -314,7 +317,10 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
                 navigate("/");
               }}
             >
-              <Home className="w-5 h-5 text-white" />
+              <svg width={20} height={20} stroke="white" fill="none" strokeWidth={2} viewBox="0 0 24 24">
+                <path d="M3 12l9-9 9 9"></path>
+                <path d="M9 21V9h6v12"></path>
+              </svg>
             </button>
           </div>
           {/* DataDone Chat "D" avatar */}
