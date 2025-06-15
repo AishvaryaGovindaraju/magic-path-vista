@@ -7,8 +7,8 @@ const Chat = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white relative">
-      {/* Add any future chat-page-specific header here */}
+    <div className="w-full min-h-screen bg-[#0A0A0A] text-white flex flex-col">
+      {/* Chat UI now fills page */}
       <HybridChat isOpen={isOpen} onToggle={() => setIsOpen((o) => !o)} />
     </div>
   );

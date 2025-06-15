@@ -280,7 +280,13 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
 
   // --- UI ---
   return (
-    <div className={`fixed bottom-0 left-0 right-0 bg-[#1A1A1D]/95 backdrop-blur-xl border-t border-[#950740]/20 transition-all duration-300 ${isOpen ? "h-96" : "h-16"} z-20 cursor-default`}>
+    <div
+      className={`
+        flex flex-col w-full min-h-screen bg-[#1A1A1D]/95 backdrop-blur-xl border-t border-[#950740]/20 z-20 cursor-default
+        transition-all duration-300
+        ${isOpen ? "opacity-100" : "opacity-80"}
+      `}
+    >
       {/* Header */}
       <div className="h-16 flex items-center justify-between px-6 cursor-pointer hover:bg-[#4E4E50]/20 transition-colors" onClick={onToggle}>
         <div className="flex items-center space-x-3">
@@ -304,14 +310,14 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
       </div>
       {/* Chat Thread */}
       {isOpen && (
-        <div className="flex flex-col h-80">
+        <div className="flex flex-col flex-1 min-h-0">
           {/* One-liner agent catchphrase banner */}
           {currentOneLiner && (
             <div className="flex justify-center pb-2 animate-fade-in-up">
               <div className="bg-gradient-to-r from-[#FFC300] to-[#FF5733] text-[#232328] font-bold rounded-xl px-6 py-2 shadow-lg border border-[#FFC300]/60 text-center max-w-md text-base animate-pulse">{currentOneLiner}</div>
             </div>
           )}
-          <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+          <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4 min-h-0">
             {messages.length === 0 && (
               <div className="text-center text-gray-400 text-sm mt-10">
                 <p>Drop your dataset, say what you want, and let the Squad do the rest.<br />
