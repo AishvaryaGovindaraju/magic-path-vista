@@ -1,6 +1,7 @@
 
 import React from "react";
 
+// Aurora background blobs now center more toward the middle and fade out at the screen edges.
 export const AuroraBackground = ({
   className = "",
   style = {},
@@ -13,41 +14,59 @@ export const AuroraBackground = ({
     style={style}
     aria-hidden="true"
   >
-    {/* Top left blob */}
-    <div className="aurora-blob bg-gradient-to-br from-[#a8edea] via-[#fed6e3] to-[#f5f7fa] opacity-60" style={{
-      top: '-10%',
-      left: '-10%',
-      width: '45vw',
-      height: '45vw',
-      filter: 'blur(100px)',
-    }} />
-    {/* Top right blob */}
-    <div className="aurora-blob bg-gradient-to-bl from-[#89f7fe] via-[#66a6ff] to-[#ffe29f] opacity-70" style={{
-      top: '-18%',
-      right: '-14%',
-      width: '40vw',
-      height: '38vw',
-      filter: 'blur(80px)',
-    }} />
-    {/* Bottom left blob */}
-    <div className="aurora-blob bg-gradient-to-tr from-[#c3cfe2] via-[#f5f7fa] to-[#e0c3fc] opacity-60" style={{
-      bottom: '-5%',
-      left: '-12%',
-      width: '38vw',
-      height: '40vw',
-      filter: 'blur(100px)',
-    }} />
-    {/* Bottom right tiny pink/purple accent */}
-    <div className="aurora-blob bg-gradient-to-l from-[#faaca8] via-[#ddd6f3] to-[#b5fffc] opacity-40" style={{
-      bottom: '-6%',
-      right: '-8%',
-      width: '26vw',
-      height: '22vw',
-      filter: 'blur(70px)',
-    }} />
+    {/* Central soft blue/green aurora blob */}
+    <div
+      className="aurora-blob bg-gradient-to-br from-[#8fd6ff] via-[#4fb2ff99] to-[#50fae5bb] opacity-80"
+      style={{
+        top: '35%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '75vw',
+        height: '48vw',
+        filter: 'blur(130px)',
+        zIndex: 0,
+      }}
+    />
+    {/* Left soft magenta/purple edge, overlapping center a bit */}
+    <div
+      className="aurora-blob bg-gradient-to-tr from-[#e0c3fc] via-[#fcf6ba] to-[#a1c4fd80] opacity-60"
+      style={{
+        top: '40%',
+        left: '-20vw',
+        width: '60vw',
+        height: '60vw',
+        filter: 'blur(100px)',
+        zIndex: 0,
+      }}
+    />
+    {/* Right aqua/green glow */}
+    <div
+      className="aurora-blob bg-gradient-to-tl from-[#43e97bcc] via-[#38f9d7c1] to-[#66a6ff99] opacity-50"
+      style={{
+        top: '45%',
+        right: '-18vw',
+        width: '60vw',
+        height: '60vw',
+        filter: 'blur(100px)',
+        zIndex: 0,
+      }}
+    />
+    {/* Gentle pink bottom layer */}
+    <div
+      className="aurora-blob bg-gradient-to-tr from-[#fdcbf1ab] via-[#fff6b784] to-[#a1c4fd65] opacity-40"
+      style={{
+        bottom: '-10vw',
+        left: '22vw',
+        width: '50vw',
+        height: '36vw',
+        filter: 'blur(130px)',
+        zIndex: 0,
+      }}
+    />
   </div>
 );
 
+// Stronger aurora-glow for the DataDone branding
 export const AuroraLogoHighlight = ({
   className = "",
   style = {},
@@ -56,17 +75,26 @@ export const AuroraLogoHighlight = ({
   style?: React.CSSProperties;
 }) => (
   <div
-    className={`pointer-events-none absolute z-0 blur-lg ${className}`}
+    className={`pointer-events-none absolute z-0 blur-2xl ${className}`}
     aria-hidden="true"
     style={{
-      left: '-30px',
-      top: '-28px',
-      width: '120px',
-      height: '60px',
-      opacity: 0.7,
+      left: '-38px',
+      top: '-36px',
+      width: '160px',
+      height: '82px',
+      opacity: 0.95,
       ...style,
     }}
   >
-    <div className="bg-gradient-to-tr from-[#66a6ff] via-[#f5f7fa] to-[#ffe29f] rounded-full w-full h-full" style={{ filter: "blur(32px)" }} />
+    {/* Brighter blue-yellow/green-pink gradient for text glow */}
+    <div
+      className="bg-gradient-to-tr from-[#61caff] via-[#a1ffce] to-[#fdcbf1] rounded-full w-full h-full"
+      style={{
+        filter: "blur(55px)",
+        opacity: 0.88,
+        zIndex: 0,
+      }}
+    />
   </div>
 );
+
