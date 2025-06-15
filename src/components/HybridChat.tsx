@@ -106,13 +106,14 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
   const handleSendMessage = () => {
     const text = inputValue.trim();
     if (!text) return;
-    setMessages(prev => [...prev,
+    setMessages(prev => [
+      ...prev,
       {
         id: Date.now().toString() + "-user",
         sender: "User",
         content: text,
         timestamp: new Date(),
-        type: "text"
+        type: "text" as const
       }
     ]);
     setInputValue('');
@@ -126,7 +127,7 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
         sender: "System",
         content: systemMsg,
         timestamp: new Date(),
-        type: "log"
+        type: "log" as const
       }
     ]);
 
@@ -134,12 +135,12 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
     setTimeout(() => {
       // Simulated agent responses for demo
       let content = "";
-      let nextMsg: Partial<ChatMessage> = { type: "text" };
+      let nextMsg: Partial<ChatMessage> = { type: "text" as const };
       switch (agent) {
         case "DataEngineer":
           content = "✅ Cleaned dataset: Removed 17 null values, dropped 'ID' column, encoded categorical variable 'Gender'.";
           nextMsg = {
-            type: "file",
+            type: "file" as const,
             fileName: "cleaned_data.csv",
             fileUrl: "/placeholder.csv",
             previewLines: ["name,age,gender,survived", "Amy,29,Female,1", "Jon,40,Male,0", "..."]
@@ -147,49 +148,55 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
           break;
         case "DataAnalyst":
           content = "✨ EDA complete: Found strong correlation between 'Age' and 'Survival'. Chart attached below.";
-          nextMsg = { type: "chart", content: "Feature correlation bar chart (simulated)" };
+          nextMsg = { type: "chart" as const, content: "Feature correlation bar chart (simulated)" };
           break;
         case "DataScientist":
           content = "🤖 ML model trained. Achieved 82% accuracy (Logistic Regression). Download predictions below.";
-          nextMsg = { type: "file", fileName: "predictions.csv", fileUrl: "/placeholder.csv", previewLines: ["id,prediction", "1,1", "2,0"] };
+          nextMsg = { type: "file" as const, fileName: "predictions.csv", fileUrl: "/placeholder.csv", previewLines: ["id,prediction", "1,1", "2,0"] };
           break;
         case "Insight":
           content = "📊 Business Insights: 'Age' and 'Gender' are top predictors of survival. See summary below.";
-          nextMsg = { type: "file", fileName: "summary.txt", fileUrl: "/placeholder.txt", previewLines: ["1. Younger age increases survival odds.", "2. Females more likely to survive."] };
+          nextMsg = { type: "file" as const, fileName: "summary.txt", fileUrl: "/placeholder.txt", previewLines: ["1. Younger age increases survival odds.", "2. Females more likely to survive."] };
           break;
         default:
           content = "I'm here to help. Please clarify your task!";
       }
+
+      // We need to make sure all fields for ChatMessage are present, especially when pushing file/chart/log
+      const agentMessage: ChatMessage = {
+        id: (Date.now() + 2).toString() + "-agent",
+        sender: agent,
+        content,
+        timestamp: new Date(),
+        type: "text"
+      };
+
+      const additionalMessages: ChatMessage[] = [];
+      if (nextMsg.type === "file") {
+        additionalMessages.push({
+          id: (Date.now() + 3).toString() + "-file",
+          sender: agent,
+          content: `Download: ${nextMsg.fileName}`,
+          timestamp: new Date(),
+          type: "file",
+          fileName: nextMsg.fileName!,
+          fileUrl: nextMsg.fileUrl ?? "/placeholder.dat",
+          previewLines: nextMsg.previewLines
+        });
+      } else if (nextMsg.type === "chart") {
+        additionalMessages.push({
+          id: (Date.now() + 4).toString() + "-chart",
+          sender: agent,
+          content: "Chart here (simulate chart PNG or embed).",
+          timestamp: new Date(),
+          type: "chart"
+        });
+      }
+
       setMessages(prev => [
         ...prev,
-        {
-          id: (Date.now() + 2).toString() + "-agent",
-          sender: agent,
-          content,
-          timestamp: new Date(),
-          type: "text"
-        },
-        ...(nextMsg.fileName
-          ? [{
-            id: (Date.now() + 3).toString() + "-file",
-            sender: agent,
-            content: `Download: ${nextMsg.fileName}`,
-            timestamp: new Date(),
-            type: "file",
-            fileName: nextMsg.fileName,
-            fileUrl: nextMsg.fileUrl || "/placeholder.dat",
-            previewLines: nextMsg.previewLines
-          }]
-          : nextMsg.type === "chart"
-            ? [{
-              id: (Date.now() + 4).toString() + "-chart",
-              sender: agent,
-              content: "Chart here (simulate chart PNG or embed).",
-              timestamp: new Date(),
-              type: "chart"
-            }]
-            : []
-        )
+        agentMessage,
+        ...additionalMessages
       ]);
       setIsTyping(false);
     }, 2000);
