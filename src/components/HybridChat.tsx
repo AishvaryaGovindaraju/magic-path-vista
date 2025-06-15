@@ -280,7 +280,7 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
 
   // --- UI ---
   return (
-    <div className={`fixed bottom-0 left-0 right-0 bg-[#1A1A1D]/95 backdrop-blur-xl border-t border-[#950740]/20 transition-all duration-300 ${isOpen ? "h-96" : "h-16"} z-20`}>
+    <div className={`fixed bottom-0 left-0 right-0 bg-[#1A1A1D]/95 backdrop-blur-xl border-t border-[#950740]/20 transition-all duration-300 ${isOpen ? "h-96" : "h-16"} z-20 cursor-default`}>
       {/* Header */}
       <div className="h-16 flex items-center justify-between px-6 cursor-pointer hover:bg-[#4E4E50]/20 transition-colors" onClick={onToggle}>
         <div className="flex items-center space-x-3">
