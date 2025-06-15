@@ -92,7 +92,7 @@ export const AgentShowcase = () => {
                     </div>
                     <div className="flex-1">
                       <h3 className="text-lg text-white mb-1">{agent.name}</h3>
-                      <p className="text-base text-white/80">{agent.description}</p>
+                      <p className="text-base md:text-[17px] text-white/90 font-medium drop-shadow-sm">{agent.description}</p>
                     </div>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ export const AgentShowcase = () => {
             </div>
 
             <h3 className="text-3xl font-light text-white mb-4">{activeAgent.name}</h3>
-            <p className="text-lg text-white/80 mb-8">{activeAgent.description}</p>
+            <p className="text-lg md:text-xl text-white/90 font-medium drop-shadow-sm mb-8">{activeAgent.description}</p>
 
             <div className="grid grid-cols-2 gap-6">
               {Object.entries(activeAgent.stats).map(([key, value]) => (
