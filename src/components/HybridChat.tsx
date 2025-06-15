@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { MessageSquare, Send, Mic, Paperclip, ChevronUp, ChevronDown } from 'lucide-react';
 import { AgentAvatar } from './AgentAvatar';
 import { ChatMessage, ChatMessageRenderer } from './ChatMessageRenderer';
@@ -29,6 +29,65 @@ const AGENT_ROUTING: Array<{ keyword: string | RegExp, agent: "DataEngineer" | "
   { keyword: /insight|business|summary|key factor|explain/i, agent: "Insight", systemMsg: "Routing to Insight agent for summary insights..." }
 ];
 
+const AGENT_ONE_LINERS: Record<string, { catchphrases: string[]; color: string }> = {
+  "DataEngineer": {
+    catchphrases: [
+      "Drop the data, I’ll handle the chaos.",
+      "Messy file? Bet. I eat formats for breakfast.",
+      "I don’t care if it’s CSV, XLSX or a smoke signal — I’ll decode it."
+    ],
+    color: "from-purple-500 to-purple-700"
+  },
+  "DataAnalyst": {
+    catchphrases: [
+      "Let’s make sense of this mess, real quick.",
+      "Numbers talk. I just translate.",
+      "Vibes check: are these stats even saying anything?"
+    ],
+    color: "from-blue-500 to-blue-700"
+  },
+  "DataScientist": {
+    catchphrases: [
+      "Hyperparams? Tuned. Accuracy? Boosted. Let’s go.",
+      "I don’t guess. I grid search.",
+      "I don’t just train models. I glow them up."
+    ],
+    color: "from-green-500 to-green-700"
+  },
+  "Insight": {
+    catchphrases: [
+      "Here’s what the data’s really saying.",
+      "Truth bomb incoming — your dataset just spilled everything.",
+      "Insights so clean, they could headline a TED talk."
+    ],
+    color: "from-yellow-400 to-yellow-600"
+  },
+  "DataIngestion": {
+    catchphrases: [
+      "Drop the data, I’ll handle the chaos.",
+      "Messy file? Bet. I eat formats for breakfast.",
+      "I don’t care if it’s CSV, XLSX or a smoke signal — I’ll decode it."
+    ],
+    color: "from-pink-500 to-pink-700"
+  },
+  "RealTimeProcessing": {
+    catchphrases: [
+      "While you blinked, I already ran that.",
+      "Live data? Chill. I multitask better than your playlist.",
+      "Streaming? I don’t pause. I play in real time."
+    ],
+    color: "from-cyan-500 to-cyan-700"
+  },
+  "AgentCommunication": {
+    catchphrases: [
+      "They talk. I sync. No drama.",
+      "I’m the group chat that actually works.",
+      "Every squad needs someone who keeps the tea moving."
+    ],
+    color: "from-orange-500 to-orange-700"
+  }
+};
+
 export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = ({ isOpen, onToggle }) => {
   const [messages, setMessages] = React.useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = React.useState('');
@@ -36,6 +95,8 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
   const [fileUrlMap, setFileUrlMap] = React.useState<{ [fileName: string]: string }>({});
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const [currentOneLiner, setCurrentOneLiner] = React.useState<string | null>(null);
+  const oneLinerTimeout = React.useRef<NodeJS.Timeout | null>(null);
 
   React.useEffect(() => {
     scrollToBottom();
@@ -100,6 +161,12 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
     }
     ]);
     if (fileInputRef.current) fileInputRef.current.value = '';
+
+    // Flash DataIngestion agent one-liner when file uploaded
+    const pick = Math.floor(Math.random() * AGENT_ONE_LINERS["DataIngestion"].catchphrases.length);
+    setCurrentOneLiner(AGENT_ONE_LINERS["DataIngestion"].catchphrases[pick]);
+    if (oneLinerTimeout.current) clearTimeout(oneLinerTimeout.current);
+    oneLinerTimeout.current = setTimeout(() => setCurrentOneLiner(null), 2500);
   };
 
   // --- Message Sending Logic ---
@@ -118,6 +185,15 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
     ]);
     setInputValue('');
     const { agent, systemMsg } = determineAgentAndSystemMsg(text);
+
+    // Flash one-liner for routed agent (unless DataIngestion)
+    if (agent in AGENT_ONE_LINERS) {
+      const liners = AGENT_ONE_LINERS[agent].catchphrases;
+      const pick = Math.floor(Math.random() * liners.length);
+      setCurrentOneLiner(liners[pick]);
+      if (oneLinerTimeout.current) clearTimeout(oneLinerTimeout.current);
+      oneLinerTimeout.current = setTimeout(() => setCurrentOneLiner(null), 2500);
+    }
 
     // Log system routing
     setMessages(prev => [
@@ -229,6 +305,12 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
       {/* Chat Thread */}
       {isOpen && (
         <div className="flex flex-col h-80">
+          {/* One-liner agent catchphrase banner */}
+          {currentOneLiner && (
+            <div className="flex justify-center pb-2 animate-fade-in-up">
+              <div className="bg-gradient-to-r from-[#FFC300] to-[#FF5733] text-[#232328] font-bold rounded-xl px-6 py-2 shadow-lg border border-[#FFC300]/60 text-center max-w-md text-base animate-pulse">{currentOneLiner}</div>
+            </div>
+          )}
           <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
             {messages.length === 0 && (
               <div className="text-center text-gray-400 text-sm mt-10">
