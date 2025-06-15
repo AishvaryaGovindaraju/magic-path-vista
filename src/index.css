@@ -3,40 +3,30 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
+/* Obys Agency inspired design system */
 
 @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-
     --radius: 0.5rem;
-
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -83,123 +73,115 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 16px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    cursor: none;
+  }
+
+  /* Custom cursor for all interactive elements */
+  a, button, [role="button"], input, textarea, select {
+    cursor: none;
   }
 }
 
-/* CodePen-inspired clean animations and effects */
-@keyframes subtle-float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-3px); }
+/* Obys Agency inspired animations */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@keyframes code-glow {
-  0%, 100% { box-shadow: 0 0 10px rgba(195, 7, 63, 0.2); }
-  50% { box-shadow: 0 0 20px rgba(195, 7, 63, 0.4); }
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-@keyframes border-flow {
-  0% { border-color: rgba(78, 78, 80, 0.3); }
-  50% { border-color: rgba(195, 7, 63, 0.5); }
-  100% { border-color: rgba(78, 78, 80, 0.3); }
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-/* Clean, minimal animations */
-.subtle-float {
-  animation: subtle-float 4s ease-in-out infinite;
+.animate-slide-up {
+  animation: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.code-glow {
-  animation: code-glow 2s ease-in-out infinite;
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
 }
 
-.border-flow {
-  animation: border-flow 3s ease-in-out infinite;
+.animate-scale-in {
+  animation: scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Clean glass morphism effect */
+/* Enhanced glass morphism */
 .glass-panel {
-  background: rgba(26, 26, 29, 0.8);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(78, 78, 80, 0.2);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Enhanced form controls */
-.form-input {
-  @apply bg-[#1A1A1D] border border-[#4E4E50]/30 rounded-lg px-3 py-2 text-white placeholder-[#CCCCCC]/50 focus:border-[#C3073F] focus:ring-1 focus:ring-[#C3073F] transition-colors;
+/* Smooth transitions for all elements */
+* {
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.form-button {
-  @apply bg-gradient-to-r from-[#C3073F] to-[#950740] hover:from-[#950740] hover:to-[#9F2232] text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105;
-}
-
-.form-button-secondary {
-  @apply bg-[#4E4E50]/20 hover:bg-[#4E4E50]/40 text-[#CCCCCC] hover:text-white border border-[#4E4E50]/30 px-4 py-2 rounded-lg font-medium transition-colors;
-}
-
-/* Code-focused scrollbar */
-.custom-scrollbar::-webkit-scrollbar {
+/* Custom scrollbar */
+::-webkit-scrollbar {
   width: 6px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(26, 26, 29, 0.5);
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 3px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(195, 7, 63, 0.6);
-  border-radius: 3px;
-  transition: background 0.2s ease;
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(195, 7, 63, 0.8);
+/* Text selection */
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
-/* Clean status indicators */
-.status-indicator {
-  @apply inline-flex items-center justify-center w-2 h-2 rounded-full;
+/* Focus states */
+button:focus, a:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.3);
+  outline-offset: 2px;
 }
 
-.status-running {
-  @apply bg-[#C3073F] animate-pulse;
-}
-
-.status-completed {
-  @apply bg-green-500;
-}
-
-.status-error {
-  @apply bg-red-500;
-}
-
-.status-idle {
-  @apply bg-[#4E4E50];
-}
-
-/* Panel transitions */
-.panel-slide-in {
-  transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.panel-slide-in.open {
-  transform: translateX(0);
-}
-
-/* Hover effects for interactive elements */
-.interactive-hover {
-  @apply transition-all duration-200 hover:bg-[#4E4E50]/20 hover:scale-105 cursor-pointer;
-}
-
-/* Clean gradient text */
-.gradient-text {
-  @apply bg-gradient-to-r from-[#C3073F] to-[#950740] bg-clip-text text-transparent;
+/* Responsive typography */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
 }
