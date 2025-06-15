@@ -23,15 +23,15 @@ export const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center space-x-3 relative z-10" style={{minWidth:120}}>
+            {/* REMOVED AuroraLogoHighlight */}
             <div className="w-10 h-10 bg-gradient-to-br from-white to-gray-300 rounded-lg flex items-center justify-center relative z-10">
               <div className="text-black font-black text-lg">DD</div>
             </div>
             <div className="relative z-10">
-              <h1 className="text-2xl font-semibold text-white tracking-tight leading-tight">
+              <h1 className="text-xl font-light text-white tracking-tight">
                 DataDone
               </h1>
-              {/* Subtitle REMOVED per instructions */}
-              {/* <div className="text-xs text-white/60 -mt-1">Multi-Agent Platform</div> */}
+              <div className="text-xs text-white/60 -mt-1">Multi-Agent Platform</div>
             </div>
           </div>
 
@@ -41,8 +41,7 @@ export const Navbar = () => {
               <a
                 key={item}
                 href="#"
-                className="text-white/90 hover:text-white transition-colors text-base font-medium"
-                style={{ letterSpacing: "0.01em" }}
+                className="text-white/70 hover:text-white transition-colors text-sm font-medium"
               >
                 {item}
               </a>
@@ -53,13 +52,13 @@ export const Navbar = () => {
           <div className="hidden md:flex items-center space-x-4">
             <a
               href="#"
-              className="text-white/90 hover:text-white transition-colors text-base font-medium"
+              className="text-white/70 hover:text-white transition-colors text-sm font-medium"
             >
               Sign In
             </a>
             <a
               href="#"
-              className="px-6 py-2 bg-white text-black rounded-full hover:bg-gray-100 transition-colors text-base font-semibold shadow-sm"
+              className="px-6 py-2 bg-white text-black rounded-full hover:bg-gray-100 transition-colors text-sm font-medium"
             >
               Get Started
             </a>
@@ -81,7 +80,7 @@ export const Navbar = () => {
                 <a
                   key={item}
                   href="#"
-                  className="block text-white/90 hover:text-white transition-colors font-medium text-lg"
+                  className="block text-white/70 hover:text-white transition-colors font-medium"
                 >
                   {item}
                 </a>
@@ -89,13 +88,13 @@ export const Navbar = () => {
               <div className="pt-4 space-y-3">
                 <a
                   href="#"
-                  className="block text-white/90 hover:text-white transition-colors font-medium text-lg"
+                  className="block text-white/70 hover:text-white transition-colors font-medium"
                 >
                   Sign In
                 </a>
                 <a
                   href="#"
-                  className="block w-full px-6 py-3 bg-white text-black rounded-full hover:bg-gray-100 transition-colors text-center font-semibold text-lg shadow"
+                  className="block w-full px-6 py-3 bg-white text-black rounded-full hover:bg-gray-100 transition-colors text-center font-medium"
                 >
                   Get Started
                 </a>
@@ -107,4 +106,3 @@ export const Navbar = () => {
     </nav>
   );
 };
-

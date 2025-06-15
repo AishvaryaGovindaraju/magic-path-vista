@@ -30,35 +30,35 @@ export const HeroSection = () => {
     <section className="min-h-screen flex items-center justify-center px-6 relative">
       <div className="max-w-6xl mx-auto text-center">
         <div className="mb-8">
-          {/* Removed the "Multi-Agent Data Science Platform" badge per instructions */}
+          <span className="inline-block px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-sm font-medium text-white/70 mb-6">
+            Multi-Agent Data Science Platform
+          </span>
         </div>
         
         <h1 
           ref={titleRef}
-          className="text-7xl md:text-9xl font-extrabold leading-none mb-8 opacity-0 translate-y-20 text-white drop-shadow-[0_3px_16px_rgba(0,0,0,0.5)]"
-          style={{ textShadow: '0 2px 16px rgba(0,0,0,0.28)' }}
+          className="text-7xl md:text-9xl font-light leading-none mb-8 opacity-0 translate-y-20"
         >
           <span className="block">Data</span>
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500 drop-shadow-[0_3px_12px_rgba(0,0,0,0.23)]">
+          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500">
             Done
           </span>
         </h1>
 
         <p 
           ref={subtitleRef}
-          className="text-2xl md:text-3xl font-semibold text-white/90 max-w-3xl mx-auto mb-12 opacity-0 translate-y-20 drop-shadow-[0_3px_16px_rgba(0,0,0,0.45)]"
-          style={{ letterSpacing: "0.01em", textShadow: "0 1px 7px rgba(0,0,0,0.25)" }}
+          className="text-xl md:text-2xl font-light text-white/60 max-w-2xl mx-auto mb-12 opacity-0 translate-y-20"
         >
           Orchestrate intelligent agents that transform raw data into actionable insights through collaborative workflows
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <button className="group px-8 py-4 bg-white text-black rounded-full hover:bg-gray-100 transition-all duration-300 flex items-center space-x-3 font-semibold text-lg shadow-lg">
+          <button className="group px-8 py-4 bg-white text-black rounded-full hover:bg-gray-100 transition-all duration-300 flex items-center space-x-3 font-medium">
             <span>Start Building</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
           
-          <button className="group px-8 py-4 border border-white/20 text-white rounded-full hover:bg-white/5 transition-all duration-300 flex items-center space-x-3 font-semibold text-lg shadow">
+          <button className="group px-8 py-4 border border-white/20 text-white rounded-full hover:bg-white/5 transition-all duration-300 flex items-center space-x-3 font-medium">
             <Play className="w-5 h-5" />
             <span>Watch Demo</span>
           </button>
