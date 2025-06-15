@@ -4,7 +4,7 @@ import { ArrowRight, Play } from 'lucide-react';
 
 export const HeroSection = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const subtitleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observerOptions = {
@@ -48,12 +48,20 @@ export const HeroSection = () => {
           </span>
         </h1>
 
-        <p 
+        <div
           ref={subtitleRef}
-          className="text-2xl md:text-3xl font-semibold text-white max-w-2xl mx-auto mb-12 opacity-0 translate-y-20 drop-shadow-[0_2px_10px_rgba(0,0,0,0.24)]"
+          className="opacity-0 translate-y-20 mb-12 max-w-2xl mx-auto animate-none"
         >
-          Orchestrate intelligent agents that transform raw data into actionable insights through collaborative workflows.
-        </p>
+          <p className="text-2xl md:text-3xl text-white drop-shadow font-normal mb-2">
+            Drop your dataset, say what you want, and let the Squad do the rest.
+          </p>
+          <p className="text-lg md:text-xl text-white/90 font-normal mb-1">
+            No coding. No waiting. No guesswork.
+          </p>
+          <p className="text-lg md:text-xl text-white/90 font-normal">
+            Just raw numbers turning into real answers — fast, clean, and smart.
+          </p>
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <button className="group px-8 py-4 bg-white text-black rounded-full hover:bg-gray-100 transition-all duration-300 flex items-center space-x-3 font-bold drop-shadow-lg">
