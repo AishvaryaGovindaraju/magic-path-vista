@@ -85,130 +85,121 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-/* Enhanced animations and effects */
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(5deg); }
+/* CodePen-inspired clean animations and effects */
+@keyframes subtle-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
 }
 
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(195, 7, 63, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(195, 7, 63, 0.6); }
+@keyframes code-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(195, 7, 63, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(195, 7, 63, 0.4); }
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+@keyframes border-flow {
+  0% { border-color: rgba(78, 78, 80, 0.3); }
+  50% { border-color: rgba(195, 7, 63, 0.5); }
+  100% { border-color: rgba(78, 78, 80, 0.3); }
 }
 
-@keyframes ripple {
-  0% { transform: scale(0); opacity: 1; }
-  100% { transform: scale(4); opacity: 0; }
+/* Clean, minimal animations */
+.subtle-float {
+  animation: subtle-float 4s ease-in-out infinite;
 }
 
-/* Custom animations */
-.float-animation {
-  animation: float 6s ease-in-out infinite;
+.code-glow {
+  animation: code-glow 2s ease-in-out infinite;
 }
 
-.glow-effect {
-  animation: glow 3s ease-in-out infinite;
+.border-flow {
+  animation: border-flow 3s ease-in-out infinite;
 }
 
-.shimmer-effect {
-  background: linear-gradient(90deg, transparent, rgba(195, 7, 63, 0.4), transparent);
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
+/* Clean glass morphism effect */
+.glass-panel {
+  background: rgba(26, 26, 29, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(78, 78, 80, 0.2);
 }
 
-/* Glass morphism effect */
-.glass-morphism {
-  background: rgba(26, 26, 29, 0.7);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(195, 7, 63, 0.2);
+/* Enhanced form controls */
+.form-input {
+  @apply bg-[#1A1A1D] border border-[#4E4E50]/30 rounded-lg px-3 py-2 text-white placeholder-[#CCCCCC]/50 focus:border-[#C3073F] focus:ring-1 focus:ring-[#C3073F] transition-colors;
 }
 
-/* Enhanced slider styling */
-.slider::-webkit-slider-thumb {
-  appearance: none;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #C3073F, #950740);
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(195, 7, 63, 0.4);
-  border: 3px solid #fff;
-  transition: all 0.2s ease;
+.form-button {
+  @apply bg-gradient-to-r from-[#C3073F] to-[#950740] hover:from-[#950740] hover:to-[#9F2232] text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105;
 }
 
-.slider::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(195, 7, 63, 0.6);
+.form-button-secondary {
+  @apply bg-[#4E4E50]/20 hover:bg-[#4E4E50]/40 text-[#CCCCCC] hover:text-white border border-[#4E4E50]/30 px-4 py-2 rounded-lg font-medium transition-colors;
 }
 
-.slider::-webkit-slider-track {
-  height: 8px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, #4E4E50 0%, #C3073F 100%);
-}
-
-.slider::-moz-range-thumb {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #C3073F, #950740);
-  cursor: pointer;
-  border: 3px solid #fff;
-  box-shadow: 0 4px 12px rgba(195, 7, 63, 0.4);
-  transition: all 0.2s ease;
-}
-
-.slider::-moz-range-track {
-  height: 8px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, #4E4E50 0%, #C3073F 100%);
-}
-
-/* Enhanced scrollbar */
-.overflow-y-auto::-webkit-scrollbar {
+/* Code-focused scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
 
-.overflow-y-auto::-webkit-scrollbar-track {
-  background: rgba(78, 78, 80, 0.2);
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(26, 26, 29, 0.5);
   border-radius: 3px;
 }
 
-.overflow-y-auto::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #C3073F, #950740);
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(195, 7, 63, 0.6);
   border-radius: 3px;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease;
 }
 
-.overflow-y-auto::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #9F2232, #C3073F);
-  transform: scaleX(1.2);
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(195, 7, 63, 0.8);
 }
 
-/* Interactive button effects */
-.btn-primary {
-  @apply bg-gradient-to-r from-[#C3073F] to-[#950740] hover:from-[#9F2232] hover:to-[#C3073F] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;
+/* Clean status indicators */
+.status-indicator {
+  @apply inline-flex items-center justify-center w-2 h-2 rounded-full;
 }
 
-.btn-secondary {
-  @apply bg-[#4E4E50]/30 hover:bg-[#4E4E50]/50 border border-[#950740]/20 hover:border-[#C3073F]/40 transition-all duration-300;
+.status-running {
+  @apply bg-[#C3073F] animate-pulse;
 }
 
-/* Pulse animation for data indicators */
-.data-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.status-completed {
+  @apply bg-green-500;
 }
 
-/* Custom gradient text */
+.status-error {
+  @apply bg-red-500;
+}
+
+.status-idle {
+  @apply bg-[#4E4E50];
+}
+
+/* Panel transitions */
+.panel-slide-in {
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.panel-slide-in.open {
+  transform: translateX(0);
+}
+
+/* Hover effects for interactive elements */
+.interactive-hover {
+  @apply transition-all duration-200 hover:bg-[#4E4E50]/20 hover:scale-105 cursor-pointer;
+}
+
+/* Clean gradient text */
 .gradient-text {
-  @apply bg-gradient-to-r from-[#C3073F] via-[#950740] to-[#C3073F] bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-[#C3073F] to-[#950740] bg-clip-text text-transparent;
 }
