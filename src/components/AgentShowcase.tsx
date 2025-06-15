@@ -60,11 +60,11 @@ export const AgentShowcase = () => {
     <section className="py-32 px-6 relative">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl xs:text-5xl md:text-6xl font-light mb-6 text-white" style={{letterSpacing: '-1px'}}>
+          <h2 className="text-5xl md:text-6xl font-light mb-6">
             Intelligent
-            <span className="block text-white/50 xs:text-5xl font-normal">Agents</span>
+            <span className="block text-white/40">Agents</span>
           </h2>
-          <p className="text-lg xs:text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-medium">
+          <p className="text-xl text-white/60 max-w-2xl mx-auto">
             Each agent is designed to excel at specific tasks while seamlessly collaborating with others
           </p>
         </div>
@@ -81,20 +81,18 @@ export const AgentShowcase = () => {
                   key={agent.id}
                   className={`p-6 rounded-2xl border cursor-pointer transition-all duration-500 ${
                     isActive 
-                      ? 'bg-white/10 border-white/20 scale-105 shadow-lg shadow-black/30' 
-                      : 'bg-white/[0.04] border-white/10 hover:bg-white/[0.06] hover:border-white/20'
+                      ? 'bg-white/5 border-white/20 scale-105' 
+                      : 'bg-white/[0.02] border-white/5 hover:bg-white/[0.03] hover:border-white/10'
                   }`}
                   onClick={() => setActiveAgent(agent)}
                 >
                   <div className="flex items-center space-x-4">
                     <div className={`p-3 rounded-xl bg-gradient-to-r ${agent.color}`}>
-                      <Icon className="w-7 h-7 text-white" />
+                      <Icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-lg md:text-xl font-semibold text-white mb-1 leading-tight">
-                        {agent.name}
-                      </h3>
-                      <p className="text-base md:text-lg text-white/90 font-medium leading-snug">{agent.description}</p>
+                      <h3 className="text-lg font-medium text-white mb-1">{agent.name}</h3>
+                      <p className="text-sm text-white/60">{agent.description}</p>
                     </div>
                   </div>
                 </div>
@@ -103,19 +101,19 @@ export const AgentShowcase = () => {
           </div>
 
           {/* Agent Details */}
-          <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-10 md:p-14 shadow-xl shadow-black/20">
+          <div className="bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-3xl p-8">
             <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${activeAgent.color} mb-6 flex items-center justify-center`}>
-              <activeAgent.icon className="w-9 h-9 text-white" />
+              <activeAgent.icon className="w-8 h-8 text-white" />
             </div>
             
-            <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4 leading-tight">{activeAgent.name}</h3>
-            <p className="text-lg md:text-xl text-white/90 mb-8 font-medium leading-snug">{activeAgent.description}</p>
+            <h3 className="text-3xl font-light text-white mb-4">{activeAgent.name}</h3>
+            <p className="text-lg text-white/70 mb-8">{activeAgent.description}</p>
             
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-2 gap-6">
               {Object.entries(activeAgent.stats).map(([key, value]) => (
                 <div key={key} className="text-center">
-                  <div className="text-2xl md:text-3xl font-semibold text-white mb-1">{value}</div>
-                  <div className="text-base md:text-lg text-white/80 capitalize font-medium">{key}</div>
+                  <div className="text-2xl font-light text-white mb-1">{value}</div>
+                  <div className="text-sm text-white/50 capitalize">{key}</div>
                 </div>
               ))}
             </div>

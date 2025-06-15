@@ -29,34 +29,36 @@ export const HeroSection = () => {
   return (
     <section className="min-h-screen flex items-center justify-center px-6 relative">
       <div className="max-w-6xl mx-auto text-center">
-        {/* Removed Multi-Agent Platform badge */}
+        <div className="mb-8">
+          <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-bold text-white shadow-md mb-6" style={{letterSpacing:'0.01em'}}>
+            Data Science Platform
+          </span>
+        </div>
         
         <h1 
           ref={titleRef}
-          className="text-5xl sm:text-7xl md:text-9xl font-light leading-tight md:leading-none mb-8 opacity-0 translate-y-20"
-          style={{ color: 'white', textShadow: '0 2px 24px rgba(10, 10, 18, 0.60)' }}
+          className="text-7xl md:text-9xl font-bold leading-none mb-8 opacity-0 translate-y-20 text-white drop-shadow-xl"
         >
-          <span className="block font-semibold">Data</span>
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 font-semibold">
+          <span className="block">Data</span>
+          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-teal-300" style={{WebkitTextStroke:'2px #ffffff22',textShadow:'0 8px 30px #0008'}}>
             Done
           </span>
         </h1>
 
         <p 
           ref={subtitleRef}
-          className="text-lg sm:text-xl md:text-3xl font-light text-white/85 max-w-2xl mx-auto mb-12 opacity-0 translate-y-20"
-          style={{ textShadow: '0 1px 12px rgba(10,10,18,0.4)' }}
+          className="text-2xl md:text-3xl font-semibold text-white max-w-2xl mx-auto mb-12 opacity-0 translate-y-20 drop-shadow-[0_2px_10px_rgba(0,0,0,0.24)]"
         >
-          Orchestrate intelligent agents that transform raw data into actionable insights through collaborative workflows
+          Orchestrate intelligent agents that transform raw data into actionable insights through collaborative workflows.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <button className="group px-8 py-4 bg-white text-black rounded-full hover:bg-gray-100 transition-all duration-300 flex items-center space-x-3 font-semibold text-lg shadow-md">
+          <button className="group px-8 py-4 bg-white text-black rounded-full hover:bg-gray-100 transition-all duration-300 flex items-center space-x-3 font-bold drop-shadow-lg">
             <span>Start Building</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
           
-          <button className="group px-8 py-4 border border-white/20 text-white rounded-full hover:bg-white/5 transition-all duration-300 flex items-center space-x-3 font-semibold text-lg shadow">
+          <button className="group px-8 py-4 border border-white/20 text-white font-bold rounded-full hover:bg-white/10 transition-all duration-300 flex items-center space-x-3 drop-shadow-lg">
             <Play className="w-5 h-5" />
             <span>Watch Demo</span>
           </button>
@@ -71,3 +73,4 @@ export const HeroSection = () => {
     </section>
   );
 };
+
