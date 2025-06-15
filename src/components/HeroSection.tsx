@@ -33,18 +33,16 @@ export const HeroSection = () => {
         
         <h1 
           ref={titleRef}
-          className="text-7xl md:text-9xl font-bold leading-none mb-8 opacity-0 translate-y-20 text-white drop-shadow-xl"
-          style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif', fontWeight: 700 }}
+          className="text-7xl md:text-9xl leading-none mb-8 opacity-0 translate-y-20 text-white drop-shadow-xl"
+          style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif' }}
         >
-          {/* Restore the original styling: no extra-bold, no custom font */}
           <span className="block">Data</span>
           <span
             className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-teal-300"
             style={{
               WebkitTextStroke: '2px #ffffff22',
               textShadow: '0 8px 30px #0008',
-              fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif',
-              fontWeight: 700
+              fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif'
             }}>
             Done
           </span>
