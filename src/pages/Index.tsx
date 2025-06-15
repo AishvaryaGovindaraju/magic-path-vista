@@ -5,6 +5,8 @@ import { AgentPipeline } from '../components/AgentPipeline';
 import { MonitoringSidebar } from '../components/MonitoringSidebar';
 import { ConfigurationPanel } from '../components/ConfigurationPanel';
 import { HybridChat } from '../components/HybridChat';
+import { ParticleBackground } from '../components/ParticleBackground';
+import { FloatingElements } from '../components/FloatingElements';
 import { cn } from '../lib/utils';
 
 const Index = () => {
@@ -13,10 +15,18 @@ const Index = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#1A1A1D] text-white overflow-hidden">
+    <div className="min-h-screen bg-[#1A1A1D] text-white overflow-hidden relative">
+      {/* Animated Background */}
+      <ParticleBackground />
+      <FloatingElements />
+      
+      {/* Gradient Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#950740]/10 via-transparent to-[#C3073F]/5 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#C3073F]/20 via-transparent to-transparent pointer-events-none" />
+      
       <Navbar />
       
-      <div className="flex h-[calc(100vh-4rem)]">
+      <div className="flex h-[calc(100vh-4rem)] relative z-10">
         {/* Monitoring Sidebar */}
         <MonitoringSidebar 
           isCollapsed={isSidebarCollapsed}
@@ -26,12 +36,12 @@ const Index = () => {
         {/* Main Content */}
         <div className="flex-1 flex flex-col relative">
           {/* Pipeline Visualization */}
-          <div className="flex-1 p-6">
+          <div className="flex-1 p-6 relative">
             <div className="mb-6">
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-[#C3073F] to-[#950740] bg-clip-text text-transparent">
-                Agent Pipeline Dashboard
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-[#C3073F] via-[#950740] to-[#C3073F] bg-clip-text text-transparent animate-pulse">
+                DataDone Pipeline Dashboard
               </h1>
-              <p className="text-[#CCCCCC] mt-2">Monitor and control your multi-agent data science workflow</p>
+              <p className="text-[#CCCCCC] mt-2 text-lg">Monitor and control your multi-agent data science workflow</p>
             </div>
             
             <AgentPipeline 

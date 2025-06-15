@@ -38,47 +38,32 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -100,19 +85,69 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 }
 
-/* Custom slider styling for DataForge */
+/* Enhanced animations and effects */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(195, 7, 63, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(195, 7, 63, 0.6); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+/* Custom animations */
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+.glow-effect {
+  animation: glow 3s ease-in-out infinite;
+}
+
+.shimmer-effect {
+  background: linear-gradient(90deg, transparent, rgba(195, 7, 63, 0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Glass morphism effect */
+.glass-morphism {
+  background: rgba(26, 26, 29, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(195, 7, 63, 0.2);
+}
+
+/* Enhanced slider styling */
 .slider::-webkit-slider-thumb {
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: linear-gradient(135deg, #C3073F, #950740);
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(195, 7, 63, 0.3);
-  border: 2px solid #fff;
+  box-shadow: 0 4px 12px rgba(195, 7, 63, 0.4);
+  border: 3px solid #fff;
+  transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(195, 7, 63, 0.6);
 }
 
 .slider::-webkit-slider-track {
@@ -122,13 +157,14 @@
 }
 
 .slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: linear-gradient(135deg, #C3073F, #950740);
   cursor: pointer;
-  border: 2px solid #fff;
-  box-shadow: 0 2px 6px rgba(195, 7, 63, 0.3);
+  border: 3px solid #fff;
+  box-shadow: 0 4px 12px rgba(195, 7, 63, 0.4);
+  transition: all 0.2s ease;
 }
 
 .slider::-moz-range-track {
@@ -137,21 +173,42 @@
   background: linear-gradient(90deg, #4E4E50 0%, #C3073F 100%);
 }
 
-/* Custom scrollbar for chat */
+/* Enhanced scrollbar */
 .overflow-y-auto::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
 }
 
 .overflow-y-auto::-webkit-scrollbar-track {
   background: rgba(78, 78, 80, 0.2);
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 .overflow-y-auto::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #C3073F, #950740);
-  border-radius: 2px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
 }
 
 .overflow-y-auto::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #9F2232, #C3073F);
+  transform: scaleX(1.2);
+}
+
+/* Interactive button effects */
+.btn-primary {
+  @apply bg-gradient-to-r from-[#C3073F] to-[#950740] hover:from-[#9F2232] hover:to-[#C3073F] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;
+}
+
+.btn-secondary {
+  @apply bg-[#4E4E50]/30 hover:bg-[#4E4E50]/50 border border-[#950740]/20 hover:border-[#C3073F]/40 transition-all duration-300;
+}
+
+/* Pulse animation for data indicators */
+.data-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom gradient text */
+.gradient-text {
+  @apply bg-gradient-to-r from-[#C3073F] via-[#950740] to-[#C3073F] bg-clip-text text-transparent;
 }
