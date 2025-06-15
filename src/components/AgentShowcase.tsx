@@ -75,13 +75,13 @@ export const AgentShowcase = () => {
             {agents.map((agent) => {
               const Icon = agent.icon;
               const isActive = activeAgent.id === agent.id;
-              
+
               return (
                 <div
                   key={agent.id}
                   className={`p-6 rounded-2xl border cursor-pointer transition-all duration-500 ${
-                    isActive 
-                      ? 'bg-white/5 border-white/20 scale-105' 
+                    isActive
+                      ? 'bg-white/5 border-white/20 scale-105'
                       : 'bg-white/[0.02] border-white/5 hover:bg-white/[0.03] hover:border-white/10'
                   }`}
                   onClick={() => setActiveAgent(agent)}
@@ -91,8 +91,8 @@ export const AgentShowcase = () => {
                       <Icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-lg font-medium text-white mb-1">{agent.name}</h3>
-                      <p className="text-sm text-white/60">{agent.description}</p>
+                      <h3 className="text-lg text-white mb-1">{agent.name}</h3>
+                      <p className="text-base text-white/80">{agent.description}</p>
                     </div>
                   </div>
                 </div>
@@ -105,10 +105,10 @@ export const AgentShowcase = () => {
             <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${activeAgent.color} mb-6 flex items-center justify-center`}>
               <activeAgent.icon className="w-8 h-8 text-white" />
             </div>
-            
+
             <h3 className="text-3xl font-light text-white mb-4">{activeAgent.name}</h3>
-            <p className="text-lg text-white/70 mb-8">{activeAgent.description}</p>
-            
+            <p className="text-lg text-white/80 mb-8">{activeAgent.description}</p>
+
             <div className="grid grid-cols-2 gap-6">
               {Object.entries(activeAgent.stats).map(([key, value]) => (
                 <div key={key} className="text-center">
