@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { AuroraLogoHighlight } from './AuroraBackground';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,11 +23,13 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-white to-gray-300 rounded-lg flex items-center justify-center">
+          <div className="flex items-center space-x-3 relative z-10" style={{minWidth:120}}>
+            {/* Aurora glow behind the brand */}
+            <AuroraLogoHighlight />
+            <div className="w-10 h-10 bg-gradient-to-br from-white to-gray-300 rounded-lg flex items-center justify-center relative z-10">
               <div className="text-black font-black text-lg">DD</div>
             </div>
-            <div>
+            <div className="relative z-10">
               <h1 className="text-xl font-light text-white tracking-tight">
                 DataDone
               </h1>
@@ -71,7 +74,6 @@ export const Navbar = () => {
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
-
         {/* Mobile Menu */}
         {isOpen && (
           <div className="md:hidden py-6 border-t border-white/10">

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import { HeroSection } from '../components/HeroSection';
@@ -6,6 +5,7 @@ import { AgentShowcase } from '../components/AgentShowcase';
 import { InteractiveDemo } from '../components/InteractiveDemo';
 import { FeatureGrid } from '../components/FeatureGrid';
 import { Footer } from '../components/Footer';
+import { AuroraBackground } from '../components/AuroraBackground';
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -21,6 +21,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white overflow-hidden relative">
+      {/* Aurora/Northern Lights Background */}
+      <AuroraBackground />
       {/* Custom Cursor */}
       <div 
         className="fixed w-4 h-4 bg-white rounded-full pointer-events-none z-50 mix-blend-difference transition-transform duration-100 ease-out"
