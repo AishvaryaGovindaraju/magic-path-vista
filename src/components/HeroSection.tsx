@@ -29,18 +29,23 @@ export const HeroSection = () => {
   return (
     <section className="min-h-screen flex items-center justify-center px-6 relative">
       <div className="max-w-6xl mx-auto text-center">
-        <div className="mb-8">
-          <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-bold text-white shadow-md mb-6" style={{letterSpacing:'0.01em'}}>
-            Data Science Platform
-          </span>
-        </div>
+        {/* Badge removed as requested */}
         
         <h1 
           ref={titleRef}
           className="text-7xl md:text-9xl font-bold leading-none mb-8 opacity-0 translate-y-20 text-white drop-shadow-xl"
+          style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif', fontWeight: 700 }}
         >
+          {/* Restore the original styling: no extra-bold, no custom font */}
           <span className="block">Data</span>
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-teal-300" style={{WebkitTextStroke:'2px #ffffff22',textShadow:'0 8px 30px #0008'}}>
+          <span
+            className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-teal-300"
+            style={{
+              WebkitTextStroke: '2px #ffffff22',
+              textShadow: '0 8px 30px #0008',
+              fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif',
+              fontWeight: 700
+            }}>
             Done
           </span>
         </h1>
@@ -73,4 +78,3 @@ export const HeroSection = () => {
     </section>
   );
 };
-
