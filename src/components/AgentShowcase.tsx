@@ -5,48 +5,60 @@ import { Database, Brain, Zap, Target, MessageSquare, BarChart3 } from 'lucide-r
 const agents = [
   {
     id: 'ingestion',
-    name: 'Data Ingestion',
-    description: 'Seamlessly collect and normalize data from multiple sources',
+    name: 'Data Ingestion Agent (The Opener)',
+    catchphrase: "“Drop the data, I’ll handle the chaos.”",
+    alt: "“Messy file? Bet. I eat formats for breakfast.”",
+    alt2: "“I don’t care if it’s CSV, XLSX or a smoke signal — I’ll decode it.”",
     icon: Database,
     color: 'from-blue-400 to-blue-600',
     stats: { processed: '2.3M', accuracy: '99.8%' }
   },
   {
     id: 'analysis',
-    name: 'Analysis Engine',
-    description: 'Advanced pattern recognition and statistical analysis',
+    name: 'Analyst Engine (The Thinker)',
+    catchphrase: "“Let’s make sense of this mess, real quick.”",
+    alt: "“Numbers talk. I just translate.”",
+    alt2: "“Vibes check: are these stats even saying anything?”",
     icon: Brain,
     color: 'from-purple-400 to-purple-600',
     stats: { insights: '847', models: '23' }
   },
   {
     id: 'processing',
-    name: 'Real-time Processing',
-    description: 'Lightning-fast data transformation and enrichment',
+    name: 'Real-Time Processing (The Speed Demon)',
+    catchphrase: "“While you blinked, I already ran that.”",
+    alt: "“Live data? Chill. I multitask better than your playlist.”",
+    alt2: "“Streaming? I don’t pause. I play in real time.”",
     icon: Zap,
     color: 'from-yellow-400 to-orange-500',
     stats: { speed: '0.3ms', throughput: '10K/s' }
   },
   {
     id: 'optimization',
-    name: 'Model Optimization',
-    description: 'Continuous learning and performance enhancement',
+    name: 'Model Optimization (The Sharpshooter)',
+    catchphrase: "“Hyperparams? Tuned. Accuracy? Boosted. Let’s go.”",
+    alt: "“I don’t guess. I grid search.”",
+    alt2: "“I don’t just train models. I glow them up.”",
     icon: Target,
     color: 'from-green-400 to-green-600',
     stats: { improvement: '+34%', accuracy: '97.2%' }
   },
   {
     id: 'communication',
-    name: 'Agent Communication',
-    description: 'Intelligent coordination between all system agents',
+    name: 'Agent Communication (The Middleman)',
+    catchphrase: "“They talk. I sync. No drama.”",
+    alt: "“I’m the group chat that actually works.”",
+    alt2: "“Every squad needs someone who keeps the tea moving.”",
     icon: MessageSquare,
     color: 'from-pink-400 to-red-500',
     stats: { messages: '1.2K', latency: '12ms' }
   },
   {
     id: 'insights',
-    name: 'Insight Generation',
-    description: 'Transform data into actionable business intelligence',
+    name: 'Insight Generation (The Dropper)',
+    catchphrase: "“Here’s what the data’s really saying.”",
+    alt: "“Truth bomb incoming — your dataset just spilled everything.”",
+    alt2: "“Insights so clean, they could headline a TED talk.”",
     icon: BarChart3,
     color: 'from-indigo-400 to-blue-500',
     stats: { reports: '156', value: '$2.3M' }
@@ -65,7 +77,7 @@ export const AgentShowcase = () => {
             <span className="block text-white/40">Agents</span>
           </h2>
           <p className="text-xl text-white/60 max-w-2xl mx-auto">
-            Each agent is designed to excel at specific tasks while seamlessly collaborating with others
+            Each agent brings a different vibe to your data stack—meet the squad and their one-liners.
           </p>
         </div>
 
@@ -92,7 +104,8 @@ export const AgentShowcase = () => {
                     </div>
                     <div className="flex-1">
                       <h3 className="text-lg text-white mb-1">{agent.name}</h3>
-                      <p className="text-base md:text-[17px] text-white/90 font-medium drop-shadow-sm">{agent.description}</p>
+                      {/* Use the main catchphrase in place of previous description */}
+                      <p className="text-base md:text-[17px] text-white/90 font-medium drop-shadow-sm">{agent.catchphrase}</p>
                     </div>
                   </div>
                 </div>
@@ -107,8 +120,12 @@ export const AgentShowcase = () => {
             </div>
 
             <h3 className="text-3xl font-light text-white mb-4">{activeAgent.name}</h3>
-            <p className="text-lg md:text-xl text-white/90 font-medium drop-shadow-sm mb-8">{activeAgent.description}</p>
-
+            {/* Main catchphrase prominent, then show alternates in smaller text */}
+            <p className="text-lg md:text-xl text-white/90 font-medium drop-shadow-sm mb-2">{activeAgent.catchphrase}</p>
+            <div className="flex flex-col gap-1 mb-8">
+              <span className="text-white/60 text-base">{activeAgent.alt}</span>
+              <span className="text-white/60 text-base">{activeAgent.alt2}</span>
+            </div>
             <div className="grid grid-cols-2 gap-6">
               {Object.entries(activeAgent.stats).map(([key, value]) => (
                 <div key={key} className="text-center">
@@ -123,3 +140,4 @@ export const AgentShowcase = () => {
     </section>
   );
 };
+
