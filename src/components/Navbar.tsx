@@ -28,10 +28,10 @@ export const Navbar = () => {
               <div className="text-black font-black text-lg">DD</div>
             </div>
             <div className="relative z-10">
-              <h1 className="text-xl font-light text-white tracking-tight">
+              <h1 className="text-xl md:text-2xl font-semibold text-white tracking-tight leading-tight">
                 DataDone
               </h1>
-              <div className="text-xs text-white/60 -mt-1">Multi-Agent Platform</div>
+              {/* Removed "Multi-Agent Platform" */}
             </div>
           </div>
 
@@ -41,7 +41,7 @@ export const Navbar = () => {
               <a
                 key={item}
                 href="#"
-                className="text-white/70 hover:text-white transition-colors text-sm font-medium"
+                className="text-white/80 hover:text-white transition-colors text-base font-medium"
               >
                 {item}
               </a>
@@ -52,13 +52,13 @@ export const Navbar = () => {
           <div className="hidden md:flex items-center space-x-4">
             <a
               href="#"
-              className="text-white/70 hover:text-white transition-colors text-sm font-medium"
+              className="text-white/80 hover:text-white transition-colors text-base font-medium"
             >
               Sign In
             </a>
             <a
               href="#"
-              className="px-6 py-2 bg-white text-black rounded-full hover:bg-gray-100 transition-colors text-sm font-medium"
+              className="px-6 py-2 bg-white text-black rounded-full hover:bg-gray-100 transition-colors text-base font-semibold"
             >
               Get Started
             </a>
@@ -80,7 +80,7 @@ export const Navbar = () => {
                 <a
                   key={item}
                   href="#"
-                  className="block text-white/70 hover:text-white transition-colors font-medium"
+                  className="block text-white/80 hover:text-white transition-colors text-lg font-medium"
                 >
                   {item}
                 </a>
@@ -88,13 +88,13 @@ export const Navbar = () => {
               <div className="pt-4 space-y-3">
                 <a
                   href="#"
-                  className="block text-white/70 hover:text-white transition-colors font-medium"
+                  className="block text-white/80 hover:text-white transition-colors text-lg font-medium"
                 >
                   Sign In
                 </a>
                 <a
                   href="#"
-                  className="block w-full px-6 py-3 bg-white text-black rounded-full hover:bg-gray-100 transition-colors text-center font-medium"
+                  className="block w-full px-6 py-3 bg-white text-black rounded-full hover:bg-gray-100 transition-colors text-center text-lg font-semibold"
                 >
                   Get Started
                 </a>
