@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -100,4 +101,57 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Custom slider styling for DataForge */
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C3073F, #950740);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(195, 7, 63, 0.3);
+  border: 2px solid #fff;
+}
+
+.slider::-webkit-slider-track {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #4E4E50 0%, #C3073F 100%);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C3073F, #950740);
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(195, 7, 63, 0.3);
+}
+
+.slider::-moz-range-track {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #4E4E50 0%, #C3073F 100%);
+}
+
+/* Custom scrollbar for chat */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: rgba(78, 78, 80, 0.2);
+  border-radius: 2px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #C3073F, #950740);
+  border-radius: 2px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #9F2232, #C3073F);
 }
