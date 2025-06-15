@@ -4,11 +4,14 @@ import { MessageSquare, Send, Mic, Paperclip, ChevronUp, ChevronDown } from 'luc
 
 interface Message {
   id: string;
-  sender: 'user' | 'agent';
+  sender: 'user' | 'agent' | 'system';
   agentName?: string;
   content: string;
   timestamp: Date;
-  type: 'text' | 'chart' | 'code';
+  type: 'text' | 'chart' | 'code' | 'file';
+  fileName?: string;
+  fileType?: string;
+  previewLines?: string[];
   attachments?: string[];
 }
 
@@ -47,6 +50,7 @@ export const HybridChat: React.FC<HybridChatProps> = ({ isOpen, onToggle }) => {
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -84,6 +88,54 @@ export const HybridChat: React.FC<HybridChatProps> = ({ isOpen, onToggle }) => {
       setMessages(prev => [...prev, agentResponse]);
       setIsTyping(false);
     }, 2000);
+  };
+
+  // --- Dataset Upload Logic ---
+  const handleFileUploadClick = (e: React.MouseEvent) => {
+    if (fileInputRef.current) fileInputRef.current.click();
+  };
+
+  const handleFileInput = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    let previewLines: string[] = [];
+    if (file.type === 'application/json' || file.name.endsWith('.json')) {
+      // Preview JSON (first few lines as string)
+      const text = await file.text();
+      previewLines = text.split('\n').slice(0, 5);
+    } else if (
+      file.type === 'text/csv' ||
+      file.name.endsWith('.csv') ||
+      file.type === 'application/vnd.ms-excel' ||
+      file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+      file.name.endsWith('.xlsx')
+    ) {
+      // Preview CSV/XLSX as plain text (basic)
+      const text = await file.text();
+      previewLines = text.split('\n').slice(0, 5);
+    }
+
+    const fType =
+      file.type ||
+      (file.name.endsWith('.csv') ? 'text/csv' :
+       file.name.endsWith('.xlsx') ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' :
+       file.name.endsWith('.json') ? 'application/json' : 'other');
+
+    const chatMsg: Message = {
+      id: Date.now().toString() + "-file",
+      sender: 'user',
+      content: `Uploaded file: ${file.name}`,
+      timestamp: new Date(),
+      type: 'file',
+      fileName: file.name,
+      fileType: fType,
+      previewLines
+    };
+
+    setMessages(prev => [...prev, chatMsg]);
+    // Reset value so the same file can be uploaded again if needed
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   const formatTime = (date: Date) => {
@@ -154,29 +206,41 @@ export const HybridChat: React.FC<HybridChatProps> = ({ isOpen, onToggle }) => {
                       <span className="text-xs text-[#4E4E50]">{formatTime(message.timestamp)}</span>
                     </div>
                   )}
-                  
-                  <div className={`rounded-2xl px-4 py-2 ${
-                    message.sender === 'user' 
-                      ? 'bg-gradient-to-r from-[#C3073F] to-[#950740] text-white' 
-                      : 'bg-[#4E4E50]/30 text-white border border-[#950740]/20'
-                  }`}>
-                    {message.type === 'chart' ? (
-                      <div>
-                        <p className="text-sm mb-2">{message.content}</p>
-                        <div className="bg-[#1A1A1D]/50 rounded-lg p-3">
-                          <div className="text-xs text-[#CCCCCC] mb-2">📊 Outlier Detection Results</div>
-                          <div className="h-20 bg-gradient-to-r from-[#950740]/20 to-[#C3073F]/20 rounded flex items-end justify-around p-2">
-                            {[65, 45, 80, 30, 55].map((height, i) => (
-                              <div key={i} className="bg-[#C3073F] rounded-t" style={{ height: `${height}%`, width: '12px' }} />
-                            ))}
+                  {/* File upload message */}
+                  {message.type === 'file' ? (
+                    <div className="rounded-2xl px-4 py-2 bg-[#252528]/80 border border-[#950740]/40 text-white">
+                      <div className="mb-1 flex items-center space-x-2">
+                        <Paperclip className="w-4 h-4 inline mr-1 text-[#CCCCCC]" />
+                        <span className="font-medium">{message.fileName}</span>
+                        <span className="text-xs text-[#CCCCCC]">({message.fileType})</span>
+                      </div>
+                      {message.previewLines && message.previewLines.length > 0 && (
+                        <pre className="bg-[#1A1A1D]/70 mt-2 rounded p-2 text-xs text-white/80 overflow-x-auto">{message.previewLines.join('\n')}</pre>
+                      )}
+                    </div>
+                  ) : (
+                    <div className={`rounded-2xl px-4 py-2 ${
+                      message.sender === 'user' 
+                        ? 'bg-gradient-to-r from-[#C3073F] to-[#950740] text-white' 
+                        : 'bg-[#4E4E50]/30 text-white border border-[#950740]/20'
+                    }`}>
+                      {message.type === 'chart' ? (
+                        <div>
+                          <p className="text-sm mb-2">{message.content}</p>
+                          <div className="bg-[#1A1A1D]/50 rounded-lg p-3">
+                            <div className="text-xs text-[#CCCCCC] mb-2">📊 Outlier Detection Results</div>
+                            <div className="h-20 bg-gradient-to-r from-[#950740]/20 to-[#C3073F]/20 rounded flex items-end justify-around p-2">
+                              {[65, 45, 80, 30, 55].map((height, i) => (
+                                <div key={i} className="bg-[#C3073F] rounded-t" style={{ height: `${height}%`, width: '12px' }} />
+                              ))}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ) : (
-                      <p className="text-sm">{message.content}</p>
-                    )}
-                  </div>
-                  
+                      ) : (
+                        <p className="text-sm">{message.content}</p>
+                      )}
+                    </div>
+                  )}
                   {message.sender === 'user' && (
                     <div className="flex justify-end mt-1">
                       <span className="text-xs text-[#4E4E50]">{formatTime(message.timestamp)}</span>
@@ -191,8 +255,21 @@ export const HybridChat: React.FC<HybridChatProps> = ({ isOpen, onToggle }) => {
           {/* Input Area */}
           <div className="border-t border-[#950740]/20 p-4">
             <div className="flex items-center space-x-3">
-              <button className="p-2 hover:bg-[#4E4E50]/30 rounded-lg transition-colors">
+              {/* File Upload */}
+              <button
+                className="p-2 hover:bg-[#4E4E50]/30 rounded-lg transition-colors flex items-center"
+                onClick={handleFileUploadClick}
+                title="Upload dataset (CSV, XLSX, JSON)"
+                type="button"
+              >
                 <Paperclip className="w-5 h-5 text-[#CCCCCC]" />
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.xlsx,.json"
+                  className="hidden"
+                  onChange={handleFileInput}
+                />
               </button>
               
               <div className="flex-1 relative">
@@ -223,3 +300,4 @@ export const HybridChat: React.FC<HybridChatProps> = ({ isOpen, onToggle }) => {
     </div>
   );
 };
+
