@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import { HeroSection } from '../components/HeroSection';
@@ -22,7 +21,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white overflow-hidden relative">
-      {/* Aurora Background Centered */}
+      {/* Aurora/Northern Lights Background */}
       <AuroraBackground />
       {/* Custom Cursor */}
       <div 
