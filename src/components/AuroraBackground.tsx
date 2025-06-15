@@ -1,8 +1,7 @@
 
 import React from "react";
 
-// A clean aurora effect using SVG gradients and paths, without blur.
-// The aurora is centered horizontally and spans the width of the screen.
+// Aurora background blobs now center more toward the middle and fade out at the screen edges.
 export const AuroraBackground = ({
   className = "",
   style = {},
@@ -11,52 +10,91 @@ export const AuroraBackground = ({
   style?: React.CSSProperties;
 }) => (
   <div
-    className={`pointer-events-none fixed inset-0 w-full h-full z-0 overflow-hidden ${className}`}
+    className={`pointer-events-none absolute inset-0 w-full h-full z-0 overflow-hidden ${className}`}
     style={style}
     aria-hidden="true"
   >
-    <svg
-      width="100%"
-      height="100%"
-      viewBox="0 0 1920 900"
-      preserveAspectRatio="none"
-      style={{ position: "absolute", top: 0, left: 0, width: "100vw", height: "100vh", minHeight: 450 }}
-    >
-      <defs>
-        <linearGradient id="aurora1" x1="0%" y1="20%" x2="100%" y2="80%">
-          <stop offset="0%" stopColor="#8fd6ff" stopOpacity="0.65" />
-          <stop offset="25%" stopColor="#66ffce" stopOpacity="0.56" />
-          <stop offset="67%" stopColor="#94ead7" stopOpacity="0.62" />
-          <stop offset="100%" stopColor="#5075fa" stopOpacity="0.6" />
-        </linearGradient>
-        <linearGradient id="aurora2" x1="30%" y1="60%" x2="80%" y2="0%">
-          <stop offset="0%" stopColor="#fdcbf1" stopOpacity="0.42" />
-          <stop offset="40%" stopColor="#a1c4fd" stopOpacity="0.34" />
-          <stop offset="80%" stopColor="#f6ba52" stopOpacity="0.28" />
-        </linearGradient>
-        <linearGradient id="aurora3" x1="0%" y1="90%" x2="90%" y2="20%">
-          <stop offset="0%" stopColor="#43e97b" stopOpacity="0.19" />
-          <stop offset="100%" stopColor="#38f9d7" stopOpacity="0.26" />
-        </linearGradient>
-      </defs>
-      {/* Main blue-green aurora streak */}
-      <path
-        d="M0,650 Q700,300 1920,600 L1920,900 L0,900 Z"
-        fill="url(#aurora1)"
-      />
-      {/* Secondary magenta/pink streak */}
-      <path
-        d="M0,480 Q1000,200 1920,540 Q1700,850 0,650 Z"
-        fill="url(#aurora2)"
-      />
-      {/* Top-left soft green accent */}
-      <path
-        d="M0,80 Q480,20 800,180 Q900,200 0,220 Z"
-        fill="url(#aurora3)"
-      />
-    </svg>
+    {/* Central soft blue/green aurora blob */}
+    <div
+      className="aurora-blob bg-gradient-to-br from-[#8fd6ff] via-[#4fb2ff99] to-[#50fae5bb] opacity-80"
+      style={{
+        top: '35%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '75vw',
+        height: '48vw',
+        filter: 'blur(130px)',
+        zIndex: 0,
+      }}
+    />
+    {/* Left soft magenta/purple edge, overlapping center a bit */}
+    <div
+      className="aurora-blob bg-gradient-to-tr from-[#e0c3fc] via-[#fcf6ba] to-[#a1c4fd80] opacity-60"
+      style={{
+        top: '40%',
+        left: '-20vw',
+        width: '60vw',
+        height: '60vw',
+        filter: 'blur(100px)',
+        zIndex: 0,
+      }}
+    />
+    {/* Right aqua/green glow */}
+    <div
+      className="aurora-blob bg-gradient-to-tl from-[#43e97bcc] via-[#38f9d7c1] to-[#66a6ff99] opacity-50"
+      style={{
+        top: '45%',
+        right: '-18vw',
+        width: '60vw',
+        height: '60vw',
+        filter: 'blur(100px)',
+        zIndex: 0,
+      }}
+    />
+    {/* Gentle pink bottom layer */}
+    <div
+      className="aurora-blob bg-gradient-to-tr from-[#fdcbf1ab] via-[#fff6b784] to-[#a1c4fd65] opacity-40"
+      style={{
+        bottom: '-10vw',
+        left: '22vw',
+        width: '50vw',
+        height: '36vw',
+        filter: 'blur(130px)',
+        zIndex: 0,
+      }}
+    />
   </div>
 );
 
-// No aurora effect inside the logo unless requested
-// If you want an aurora/gradient fill INSIDE the DataDone name, let me know!
+// Stronger aurora-glow for the DataDone branding
+export const AuroraLogoHighlight = ({
+  className = "",
+  style = {},
+}: {
+  className?: string;
+  style?: React.CSSProperties;
+}) => (
+  <div
+    className={`pointer-events-none absolute z-0 blur-2xl ${className}`}
+    aria-hidden="true"
+    style={{
+      left: '-38px',
+      top: '-36px',
+      width: '160px',
+      height: '82px',
+      opacity: 0.95,
+      ...style,
+    }}
+  >
+    {/* Brighter blue-yellow/green-pink gradient for text glow */}
+    <div
+      className="bg-gradient-to-tr from-[#61caff] via-[#a1ffce] to-[#fdcbf1] rounded-full w-full h-full"
+      style={{
+        filter: "blur(55px)",
+        opacity: 0.88,
+        zIndex: 0,
+      }}
+    />
+  </div>
+);
+
