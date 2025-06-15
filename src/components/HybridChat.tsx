@@ -294,20 +294,7 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
         <div className="flex items-center space-x-3">
           {/* Navigation icons to the left of DataDone avatar and title */}
           <div className="flex items-center space-x-2 mr-2">
-            <button
-              className="bg-[#232328] hover:bg-[#950740]/20 rounded-full p-1 transition"
-              title="Back to Home"
-              type="button"
-              onClick={e => {
-                e.stopPropagation();
-                navigate("/");
-              }}
-            >
-              <svg width={20} height={20} stroke="white" fill="none" strokeWidth={2} viewBox="0 0 24 24">
-                <path d="M19 12H5"></path>
-                <path d="M12 19l-7-7 7-7"></path>
-              </svg>
-            </button>
+            {/* Removed the arrow button, only Home button remains */}
             <button
               className="bg-[#232328] hover:bg-[#950740]/20 rounded-full p-1 transition"
               title="Home"
@@ -317,7 +304,7 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
                 navigate("/");
               }}
             >
-              {/* Replacing previous SVG with lucide-react Home icon */}
+              {/* Home icon using lucide-react */}
               <Home color="white" size={20} strokeWidth={2} />
             </button>
           </div>
