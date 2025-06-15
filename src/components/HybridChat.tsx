@@ -291,9 +291,9 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
     >
       {/* Header */}
       <div className="h-16 flex items-center justify-between px-6 cursor-pointer hover:bg-[#4E4E50]/20 transition-colors" onClick={onToggle}>
-        <div className="flex items-center space-x-3 relative" style={{ minWidth: 0 }}>
-          {/* Vertical navigation icons above avatar/title */}
-          <div className="absolute left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center space-y-2 z-10">
+        <div className="flex items-center space-x-3">
+          {/* Navigation icons to the left of DataDone avatar and title */}
+          <div className="flex items-center space-x-2 mr-2">
             <button
               className="bg-[#232328] hover:bg-[#950740]/20 rounded-full p-1 transition"
               title="Back to Home"
