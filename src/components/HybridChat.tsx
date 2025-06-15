@@ -317,10 +317,8 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
                 navigate("/");
               }}
             >
-              <svg width={20} height={20} stroke="white" fill="none" strokeWidth={2} viewBox="0 0 24 24">
-                <path d="M3 12l9-9 9 9"></path>
-                <path d="M9 21V9h6v12"></path>
-              </svg>
+              {/* Replacing previous SVG with lucide-react Home icon */}
+              <Home color="white" size={20} strokeWidth={2} />
             </button>
           </div>
           {/* DataDone Chat "D" avatar */}
