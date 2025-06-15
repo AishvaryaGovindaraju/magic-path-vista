@@ -1,8 +1,9 @@
 import React from 'react';
-import { MessageSquare, Send, Mic, Paperclip, ChevronUp, ChevronDown } from 'lucide-react';
+import { MessageSquare, Send, Mic, Paperclip, ChevronUp, ChevronDown, ArrowLeft, Home } from 'lucide-react';
 import { AgentAvatar } from './AgentAvatar';
 import { ChatMessage, ChatMessageRenderer } from './ChatMessageRenderer';
 import { AgentType } from './AgentAvatar';
+import { useNavigate } from 'react-router-dom';
 
 interface Message {
   id: string;
@@ -89,6 +90,7 @@ const AGENT_ONE_LINERS: Record<string, { catchphrases: string[]; color: string }
 };
 
 export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = ({ isOpen, onToggle }) => {
+  const navigate = useNavigate();
   const [messages, setMessages] = React.useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = React.useState('');
   const [isTyping, setIsTyping] = React.useState(false);
@@ -290,6 +292,32 @@ export const HybridChat: React.FC<{ isOpen: boolean; onToggle: () => void; }> = 
       {/* Header */}
       <div className="h-16 flex items-center justify-between px-6 cursor-pointer hover:bg-[#4E4E50]/20 transition-colors" onClick={onToggle}>
         <div className="flex items-center space-x-3">
+          {/* Navigation icons */}
+          <div className="flex items-center space-x-2 mr-2">
+            <button
+              className="p-0.5 rounded-full hover:bg-[#950740]/20 transition"
+              title="Back to Home"
+              type="button"
+              onClick={e => {
+                e.stopPropagation();
+                navigate("/");
+              }}
+            >
+              <ArrowLeft className="w-5 h-5 text-white" />
+            </button>
+            <button
+              className="p-0.5 rounded-full hover:bg-[#950740]/20 transition"
+              title="Home"
+              type="button"
+              onClick={e => {
+                e.stopPropagation();
+                navigate("/");
+              }}
+            >
+              <Home className="w-5 h-5 text-white" />
+            </button>
+          </div>
+          {/* DataDone Chat "D" avatar */}
           <div className="w-8 h-8 bg-gradient-to-br from-[#C3073F] to-[#950740] rounded-full flex items-center justify-center">
             <span className="font-bold text-white">D</span>
           </div>
